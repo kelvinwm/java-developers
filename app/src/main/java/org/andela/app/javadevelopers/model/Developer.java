@@ -1,4 +1,4 @@
-package org.andela.app.javadevelopers;
+package org.andela.app.javadevelopers.model;
 
 public class Developer {
     String username;
