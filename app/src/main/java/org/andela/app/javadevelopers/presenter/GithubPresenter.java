@@ -1,5 +1,6 @@
 package org.andela.app.javadevelopers.presenter;
 
+<<<<<<< HEAD
 import android.util.Log;
 
 import org.andela.app.javadevelopers.model.GithubUsers;
@@ -43,4 +44,7 @@ public class GithubPresenter {
 
 
     }
+=======
+public class GithubPresenter {
+>>>>>>> ft(retrofit instance): retrofit instance
 }
