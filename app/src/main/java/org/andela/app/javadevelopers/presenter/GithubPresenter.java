@@ -1,6 +1,5 @@
 package org.andela.app.javadevelopers.presenter;
 
-<<<<<<< HEAD
 import android.util.Log;
 
 import org.andela.app.javadevelopers.model.GithubUsers;
@@ -20,12 +19,12 @@ public class GithubPresenter {
     public GithubPresenter(GithubUsersView githubUsersView) {
         this.githubUsersView = githubUsersView;
 
-        if(this.githubService==null){
+        if (this.githubService == null) {
             this.githubService = new GithubService();
         }
     }
 
-    public void getDevelopers(){
+    public void getDevelopers() {
 
         githubService
                 .getGithubApi()
@@ -42,9 +41,5 @@ public class GithubPresenter {
                     }
                 });
 
-
     }
-=======
-public class GithubPresenter {
->>>>>>> ft(retrofit instance): retrofit instance
 }
