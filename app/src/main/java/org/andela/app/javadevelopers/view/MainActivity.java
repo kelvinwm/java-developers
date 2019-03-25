@@ -23,7 +23,6 @@ import org.andela.app.javadevelopers.RecylerClickListener;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private RecyclerView recyclerView;
 
     @Override
@@ -53,7 +52,6 @@ public class MainActivity extends AppCompatActivity
                 recyclerView, new RecylerClickListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
 
             }
 
