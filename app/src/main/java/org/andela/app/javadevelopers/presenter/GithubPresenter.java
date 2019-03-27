@@ -19,11 +19,10 @@ public class GithubPresenter {
     public GithubPresenter(GithubUsersView githubUsersView) {
         this.githubUsersView = githubUsersView;
 
-        if (this.githubService == null) {
+        if(this.githubService==null){
             this.githubService = new GithubService();
         }
     }
-
     public void getDevelopers() {
 
         githubService

@@ -1,7 +1,6 @@
 package org.andela.app.javadevelopers.service;
 
 import org.andela.app.javadevelopers.model.GithubUsersResponse;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 
