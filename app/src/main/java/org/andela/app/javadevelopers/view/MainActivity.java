@@ -20,13 +20,12 @@ import android.view.MenuItem;
 
 import org.andela.app.javadevelopers.R;
 import org.andela.app.javadevelopers.RecylerClickListener;
+
 import java.util.ArrayList;
+
 import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
-
-import java.util.ArrayList;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GithubUsersView {
@@ -64,6 +63,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view, int position) {
 
+                GithubUsers githubUsers = developerlistinstance.get(position);
+                Intent view_details = new Intent(MainActivity.this,
+                        DetailsActivity.class);
+                view_details.putExtra("Github_username", githubUsers.getUsername());
+                view_details.putExtra("Github_link", githubUsers.getGithublink());
+                view_details.putExtra("Github_photo_link", githubUsers.getProfileimg());
+                startActivity(view_details);
+
             }
 
             @Override
@@ -71,8 +78,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         }));
-
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         }
@@ -87,12 +93,12 @@ public class MainActivity extends AppCompatActivity
         githubAdapter = new GithubAdapter(developerlistinstance);
         githubAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(githubAdapter);
-
         for (GithubUsers githubUser : githubUsersList) {
 
             Log.d("TAG", "Am reaching hoping " + githubUser.getUsername());
         }
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

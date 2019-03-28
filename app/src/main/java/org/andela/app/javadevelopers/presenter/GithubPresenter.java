@@ -8,7 +8,6 @@ import org.andela.app.javadevelopers.service.GithubService;
 import org.andela.app.javadevelopers.view.GithubUsersView;
 
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,13 +32,13 @@ public class GithubPresenter {
                 .enqueue(new Callback<GithubUsersResponse>() {
                     @Override
                     public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
-                        if (!response.isSuccessful()){
+                        if (!response.isSuccessful()) {
                             Log.d("TAG", "Unsuccessful returned: " + response.code());
                             return;
                         }
 
                         GithubUsersResponse dev = response.body();
-                        if(dev != null && dev.getGithubUsersList() != null){
+                        if (dev != null && dev.getGithubUsersList() != null) {
                             ArrayList<GithubUsers> result = dev.getGithubUsersList();
                             githubUsersView.githubUsersReady(result);
                         }

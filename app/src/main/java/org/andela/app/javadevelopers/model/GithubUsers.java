@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 public class GithubUsers implements Parcelable {
-
     @SerializedName("login")
     String username;
 
