@@ -16,20 +16,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.andela.app.javadevelopers.model.Developer;
 import org.andela.app.javadevelopers.R;
-import org.andela.app.javadevelopers.adapters.RecycleviewAdapter;
 import org.andela.app.javadevelopers.RecylerClickListener;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private List<Developer> developerList ;
+
     private RecyclerView recyclerView;
-    private RecycleviewAdapter recycleviewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,27 +43,17 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         recyclerView = findViewById(R.id.developer_list);
-        developerList = new ArrayList<>();
 
-        recycleviewAdapter = new RecycleviewAdapter(developerList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        recyclerView.setAdapter(recycleviewAdapter);
-        getDevelopers();
 
         recyclerView.addOnItemTouchListener(new RecylerClickListener(getApplicationContext(),
                 recyclerView, new RecylerClickListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Developer developer_item= developerList.get(position);
-                Intent view_details = new Intent(MainActivity.this,
-                        DetailsActivity.class);
-                view_details.putExtra("Github_username",developer_item.getUsername());
-                view_details.putExtra("Github_link",developer_item.getGithublink());
-                view_details.putExtra("Github_photo_link",developer_item.getProfileimg());
-                startActivity(view_details);
+
 
             }
 
@@ -81,17 +66,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void getDevelopers(){
-
-        developerList.add(
-                new Developer("kelvinwm","https://github.com/kelvinwm",
-                        "https://avatars1.githubusercontent.com/u/23077054?v=4"));
-        developerList.add(
-                new Developer("here678","https://github.com/kelvinwm2001",
-                        "https://avatars1.githubusercontent.com/u/15030626?v=4"));
-        recycleviewAdapter.notifyDataSetChanged();
-
-    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
