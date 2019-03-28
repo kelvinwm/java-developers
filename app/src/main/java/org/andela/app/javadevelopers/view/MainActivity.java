@@ -25,11 +25,13 @@ import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GithubUsersView {
     private ArrayList<GithubUsers> developerlistinstance = new ArrayList<>();
-    private  static String LIST_STATE = "list_state";
+    private static String LIST_STATE = "list_state";
     private Parcelable savedRecyclerlayoutstate;
     private static final String BUNDLE_RECYCLER_LAYOUT = "recycler_layout";
     private RecyclerView recyclerView;
@@ -82,11 +84,15 @@ public class MainActivity extends AppCompatActivity
     public void githubUsersReady(ArrayList<GithubUsers> githubUsersList) {
         developerlistinstance = githubUsersList;
 
-            for(GithubUsers githubUser: githubUsersList){
-                Log.d("TAG", "Am reaching hoping " + githubUser.getUsername());
-            }
-    }
+        githubAdapter = new GithubAdapter(developerlistinstance);
+        githubAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(githubAdapter);
 
+        for (GithubUsers githubUser : githubUsersList) {
+
+            Log.d("TAG", "Am reaching hoping " + githubUser.getUsername());
+        }
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -101,11 +107,13 @@ public class MainActivity extends AppCompatActivity
         savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         super.onRestoreInstanceState(savedInstanceState);
     }
-   private void restoreLayoutPosition(){
-        if(savedRecyclerlayoutstate != null){
+
+    private void restoreLayoutPosition() {
+        if (savedRecyclerlayoutstate != null) {
             recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerlayoutstate);
         }
-   }
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -144,9 +152,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        }  else if (id == R.id.nav_send) {
+        if (id == R.id.nav_home) {
+            // redirect to home page
+        } else if (id == R.id.nav_send) {
 
         }
 
