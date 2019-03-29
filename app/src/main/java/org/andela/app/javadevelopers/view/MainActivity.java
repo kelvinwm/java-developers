@@ -23,7 +23,6 @@ import org.andela.app.javadevelopers.RecylerClickListener;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private RecyclerView recyclerView;
 
     @Override
@@ -49,11 +48,11 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
+
         recyclerView.addOnItemTouchListener(new RecylerClickListener(getApplicationContext(),
                 recyclerView, new RecylerClickListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
 
             }
 
@@ -106,15 +105,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        }  else if (id == R.id.nav_send) {
 
         }
 
