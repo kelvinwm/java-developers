@@ -2,6 +2,7 @@ package org.andela.app.javadevelopers.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,12 +19,19 @@ import android.view.MenuItem;
 
 import org.andela.app.javadevelopers.R;
 import org.andela.app.javadevelopers.RecylerClickListener;
+import org.andela.app.javadevelopers.model.GithubUsers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     private RecyclerView recyclerView;
+    private ArrayList<GithubUsers> developerlistinstance = new ArrayList<>();
+    private  static String LIST_STATE = "list_state";
+    private Parcelable savedRecyclerlayoutstate;
+    private static final String BUNDLE_RECYCLER_LAYOUT = "recycler_layout";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,6 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
-
         recyclerView.addOnItemTouchListener(new RecylerClickListener(getApplicationContext(),
                 recyclerView, new RecylerClickListener.ClickListener() {
             @Override
@@ -62,8 +69,32 @@ public class MainActivity extends AppCompatActivity
             }
         }));
 
+        if(savedInstanceState!=null){
+            developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
+            savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+        }
+
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(LIST_STATE, developerlistinstance);
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
+        savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+   private void restoreLayoutPosition(){
+        if(savedRecyclerlayoutstate != null){
+            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerlayoutstate);
+        }
+   }
 
     @Override
     public void onBackPressed() {
