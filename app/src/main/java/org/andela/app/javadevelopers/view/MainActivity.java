@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,19 +20,20 @@ import android.view.MenuItem;
 
 import org.andela.app.javadevelopers.R;
 import org.andela.app.javadevelopers.RecylerClickListener;
-import org.andela.app.javadevelopers.model.GithubUsers;
-
 import java.util.ArrayList;
-import java.util.List;
+import org.andela.app.javadevelopers.adapter.GithubAdapter;
+import org.andela.app.javadevelopers.model.GithubUsers;
+import org.andela.app.javadevelopers.presenter.GithubPresenter;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    private RecyclerView recyclerView;
+        implements NavigationView.OnNavigationItemSelectedListener, GithubUsersView {
     private ArrayList<GithubUsers> developerlistinstance = new ArrayList<>();
     private  static String LIST_STATE = "list_state";
     private Parcelable savedRecyclerlayoutstate;
     private static final String BUNDLE_RECYCLER_LAYOUT = "recycler_layout";
+    private RecyclerView recyclerView;
+    private GithubAdapter githubAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,6 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
         recyclerView.addOnItemTouchListener(new RecylerClickListener(getApplicationContext(),
                 recyclerView, new RecylerClickListener.ClickListener() {
             @Override
@@ -73,9 +74,19 @@ public class MainActivity extends AppCompatActivity
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         }
-
-
+        GithubPresenter githubPresenter = new GithubPresenter(this);
+        githubPresenter.getDevelopers();
     }
+
+    @Override
+    public void githubUsersReady(ArrayList<GithubUsers> githubUsersList) {
+        developerlistinstance = githubUsersList;
+
+            for(GithubUsers githubUser: githubUsersList){
+                Log.d("TAG", "Am reaching hoping " + githubUser.getUsername());
+            }
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -95,7 +106,6 @@ public class MainActivity extends AppCompatActivity
             recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerlayoutstate);
         }
    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -144,4 +154,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

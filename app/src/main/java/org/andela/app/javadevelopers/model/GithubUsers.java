@@ -46,7 +46,6 @@ public class GithubUsers implements Parcelable {
         return profileimg;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
