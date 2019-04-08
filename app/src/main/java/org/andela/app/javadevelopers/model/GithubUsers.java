@@ -9,7 +9,7 @@ public class GithubUsers implements Parcelable {
     @SerializedName("login")
     String username;
 
-    @SerializedName("url")
+    @SerializedName("html_url")
     String githublink;
 
     @SerializedName("avatar_url")

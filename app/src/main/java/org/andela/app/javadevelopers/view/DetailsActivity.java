@@ -21,6 +21,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     TextView github_name, user_github_link;
     ImageView user_profile_photo;
+    ImageButton share;
     String github_username, github_link, user_profile_link;
 
     @Override
@@ -31,9 +32,10 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        github_name =  findViewById(R.id.user_profile_name);
-        user_github_link =  findViewById(R.id.user_github_link);
-        user_profile_photo =  findViewById(R.id.user_profile_photo);
+        github_name = findViewById(R.id.user_profile_name);
+        user_github_link = findViewById(R.id.user_github_link);
+        user_profile_photo = findViewById(R.id.user_profile_photo);
+        share = findViewById(R.id.share);
 
         Intent username = getIntent();
         github_username = username.getStringExtra("Github_username");
@@ -51,10 +53,23 @@ public class DetailsActivity extends AppCompatActivity {
         user_github_link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //View developer's github page
+                //View developer's github page
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(github_link));
                 startActivity(i);
+            }
+        });
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = "Check out this awesome developer @" + github_username +
+                        " ," + github_link;
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, message);
+                startActivity(Intent.createChooser(shareIntent, "Share github profile"));
             }
         });
 
