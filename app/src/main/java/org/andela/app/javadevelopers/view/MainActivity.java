@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         }
+
         swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -112,7 +113,6 @@ public class MainActivity extends AppCompatActivity
         GithubPresenter githubPresenter = new GithubPresenter(this);
         githubPresenter.getDevelopers();
 
-            Log.d("TAG", "Am reaching hoping " + githubUser.getUsername());
         }
 
 
