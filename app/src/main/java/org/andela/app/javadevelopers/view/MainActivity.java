@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,11 +30,6 @@ import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
 import org.andela.app.javadevelopers.util.ConnectivityHelper;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -100,7 +94,6 @@ public class MainActivity extends AppCompatActivity
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         }
-
         swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -160,7 +153,6 @@ public class MainActivity extends AppCompatActivity
         swipeRefreshLayout.setRefreshing(false);
     }
 
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -168,19 +160,20 @@ public class MainActivity extends AppCompatActivity
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
     }
 
+
+
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
         savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         super.onRestoreInstanceState(savedInstanceState);
     }
-
-    private void restoreLayoutPosition() {
-        if (savedRecyclerlayoutstate != null) {
+   private void restoreLayoutPosition(){
+        if(savedRecyclerlayoutstate != null){
             recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerlayoutstate);
         }
-    }
-
+   }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -220,7 +213,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
         } else if (id == R.id.nav_send) {
 
         }
