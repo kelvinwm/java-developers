@@ -2,8 +2,11 @@ package org.andela.app.javadevelopers.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,13 +21,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.andela.app.javadevelopers.R;
 import org.andela.app.javadevelopers.RecylerClickListener;
 import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
+import org.andela.app.javadevelopers.util.ConnectivityHelper;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -38,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     ProgressDialog progressDialog;
     RecyclerView.LayoutManager layoutManager;
     private GithubAdapter githubAdapter;
+    View parentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +69,7 @@ public class MainActivity extends AppCompatActivity
 
         recyclerView = findViewById(R.id.developer_list);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        parentLayout = findViewById(android.R.id.content);
         progressDialog = new ProgressDialog(MainActivity.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -96,7 +109,27 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        loadUsers();
+        checkInternetConnection();
+    }
+
+    private void checkInternetConnection() {
+        if (ConnectivityHelper.isConnectedToNetwork(this)) {
+            loadUsers();
+        } else {
+            //Show Snackbar
+            Snackbar snackbar = Snackbar
+                    .make(parentLayout, "No internet connection!", Snackbar.LENGTH_LONG)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            checkInternetConnection();
+                        }
+                    });
+            // Changing message text color
+            snackbar.setActionTextColor(Color.GREEN);
+
+            snackbar.show();
+        }
     }
 
     private void loadUsers() {
@@ -107,7 +140,6 @@ public class MainActivity extends AppCompatActivity
         progressDialog.setCancelable(false);
         fetchGithubUsers();
     }
-
 
     private void fetchGithubUsers() {
 
@@ -188,7 +220,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // redirect to home page
+
         } else if (id == R.id.nav_send) {
 
         }
