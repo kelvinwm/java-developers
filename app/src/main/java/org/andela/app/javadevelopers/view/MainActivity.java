@@ -123,9 +123,10 @@ public class MainActivity extends AppCompatActivity
 
             snackbar.show();
         }
+        loadUsers();
     }
 
-    private void loadUsers() {
+    private void loadUsers(){
         progressDialog.setTitle("Loading users");
         progressDialog.setMessage("Please wait...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -161,19 +162,19 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
         savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         super.onRestoreInstanceState(savedInstanceState);
     }
-   private void restoreLayoutPosition(){
-        if(savedRecyclerlayoutstate != null){
+
+    private void restoreLayoutPosition() {
+        if (savedRecyclerlayoutstate != null) {
             recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerlayoutstate);
         }
-   }
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
