@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         recyclerView = findViewById(R.id.developer_list);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        parentLayout = findViewById(android.R.id.content);
         progressDialog = new ProgressDialog(MainActivity.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        checkInternetConnection();
+        this.checkInternetConnection();
     }
 
     private void checkInternetConnection() {

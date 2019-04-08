@@ -33,6 +33,12 @@ public class GithubUsers implements Parcelable {
         }
     };
 
+    public GithubUsers(String username, String githublink, String profileimg) {
+        this.username = username;
+        this.githublink = githublink;
+        this.profileimg = profileimg;
+    }
+
     public String getUsername() {
         return username;
     }
