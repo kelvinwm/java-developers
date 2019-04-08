@@ -21,12 +21,10 @@ import android.view.MenuItem;
 
 import org.andela.app.javadevelopers.R;
 import org.andela.app.javadevelopers.RecylerClickListener;
-
-import java.util.ArrayList;
-
 import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
+import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GithubUsersView {
     private ArrayList<GithubUsers> developerlistinstance = new ArrayList<>();
@@ -37,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
     RecyclerView.LayoutManager layoutManager;
+    private GithubAdapter githubAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +147,7 @@ public class MainActivity extends AppCompatActivity
             recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerlayoutstate);
         }
     }
+
 
     @Override
     public void onBackPressed() {
