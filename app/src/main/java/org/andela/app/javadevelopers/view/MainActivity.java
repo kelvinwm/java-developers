@@ -1,10 +1,13 @@
 package org.andela.app.javadevelopers.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,7 +37,10 @@ public class MainActivity extends AppCompatActivity
     private Parcelable savedRecyclerlayoutstate;
     private static final String BUNDLE_RECYCLER_LAYOUT = "recycler_layout";
     private RecyclerView recyclerView;
-    private GithubAdapter githubAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    ProgressDialog progressDialog;
+    RecyclerView.LayoutManager layoutManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +59,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         recyclerView = findViewById(R.id.developer_list);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        progressDialog = new ProgressDialog(MainActivity.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        layoutManager = new GridLayoutManager(this, 3);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnItemTouchListener(new RecylerClickListener(getApplicationContext(),
                 recyclerView, new RecylerClickListener.ClickListener() {
             @Override
@@ -82,14 +90,34 @@ public class MainActivity extends AppCompatActivity
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         }
+        swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchGithubUsers();
+            }
+        });
 
         loadUsers();
     }
 
     private void loadUsers() {
+        progressDialog.setTitle("Loading users");
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        fetchGithubUsers();
+    }
+
+
+    private void fetchGithubUsers() {
+
         GithubPresenter githubPresenter = new GithubPresenter(this);
         githubPresenter.getDevelopers();
+
     }
+
 
     @Override
     public void githubUsersReady(ArrayList<GithubUsers> githubUsersList) {
@@ -98,10 +126,8 @@ public class MainActivity extends AppCompatActivity
         GithubAdapter githubAdapter = new GithubAdapter(developerlistinstance);
         githubAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(githubAdapter);
-        for (GithubUsers githubUser : githubUsersList) {
-
-            Log.d("TAG", "Am reaching hoping " + githubUser.getUsername());
-        }
+        progressDialog.dismiss();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 

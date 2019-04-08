@@ -32,7 +32,6 @@ public class GithubPresenter {
                 .enqueue(new Callback<GithubUsersResponse>() {
                     @Override
                     public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
-
                         if (!response.isSuccessful()){
                             Log.d("TAG", "Unsuccessful returned: " + response.code());
                             return;

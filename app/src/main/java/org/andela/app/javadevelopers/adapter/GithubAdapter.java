@@ -27,8 +27,6 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.viewHolder
             super(itemView);
             profimage = (ImageView) itemView.findViewById(R.id.prof_image);
             username = (TextView) itemView.findViewById(R.id.git_username);
-
-            Log.d("TAG", "Am reaching herer");
         }
     }
 
