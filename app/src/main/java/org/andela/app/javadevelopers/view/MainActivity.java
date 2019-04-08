@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity
     private SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
     RecyclerView.LayoutManager layoutManager;
-    private GithubAdapter githubAdapter;
     View parentLayout;
 
     @Override
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity
 
         recyclerView = findViewById(R.id.developer_list);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        parentLayout = findViewById(android.R.id.content);
         progressDialog = new ProgressDialog(MainActivity.this);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -125,7 +123,6 @@ public class MainActivity extends AppCompatActivity
         loadUsers();
     }
 
-
     private void loadUsers() {
         progressDialog.setTitle("Loading users");
         progressDialog.setMessage("Please wait...");
@@ -137,7 +134,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void fetchGithubUsers() {
-
         GithubPresenter githubPresenter = new GithubPresenter(this);
         githubPresenter.getDevelopers();
 
