@@ -24,7 +24,9 @@ import org.andela.app.javadevelopers.RecylerClickListener;
 import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
+
 import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GithubUsersView {
     private ArrayList<GithubUsers> developerlistinstance = new ArrayList<>();
@@ -112,8 +114,7 @@ public class MainActivity extends AppCompatActivity
         GithubPresenter githubPresenter = new GithubPresenter(this);
         githubPresenter.getDevelopers();
 
-        }
-
+    }
 
 
     @Override
@@ -147,7 +148,6 @@ public class MainActivity extends AppCompatActivity
             recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerlayoutstate);
         }
     }
-
 
     @Override
     public void onBackPressed() {
