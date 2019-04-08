@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +27,6 @@ import java.util.ArrayList;
 import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GithubUsersView {
     private ArrayList<GithubUsers> developerlistinstance = new ArrayList<>();
@@ -40,7 +37,6 @@ public class MainActivity extends AppCompatActivity
     private SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
     RecyclerView.LayoutManager layoutManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +112,9 @@ public class MainActivity extends AppCompatActivity
         GithubPresenter githubPresenter = new GithubPresenter(this);
         githubPresenter.getDevelopers();
 
-    }
+            Log.d("TAG", "Am reaching hoping " + githubUser.getUsername());
+        }
+
 
 
     @Override
@@ -137,7 +135,6 @@ public class MainActivity extends AppCompatActivity
         outState.putParcelableArrayList(LIST_STATE, developerlistinstance);
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
     }
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {

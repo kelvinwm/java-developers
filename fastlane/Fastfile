@@ -12,11 +12,15 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 fastlane_require 'dotenv'
 
 update_fastlane
 
+=======
+# update_fastlane
+>>>>>>> ft(share profile): share profile
 =======
 # update_fastlane
 >>>>>>> ft(share profile): share profile
