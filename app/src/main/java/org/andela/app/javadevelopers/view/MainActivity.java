@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
         loadUsers();
     }
 
-    private void loadUsers() {
+    private void loadUsers(){
         progressDialog.setTitle("Loading users");
         progressDialog.setMessage("Please wait...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
