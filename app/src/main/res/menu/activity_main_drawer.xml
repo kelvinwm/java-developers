@@ -5,8 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
+<<<<<<< HEAD
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
+=======
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_menu_camera"
+>>>>>>> ft(share profile): share profile
             android:title="Home" />
     </group>
 

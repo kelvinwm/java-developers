@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity
         if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
             EspressoIdlingResource.decrement();
         }
-
     }
 
     @Override
@@ -165,7 +164,6 @@ public class MainActivity extends AppCompatActivity
         outState.putParcelableArrayList(LIST_STATE, developerlistinstance);
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
     }
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
