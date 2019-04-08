@@ -123,7 +123,8 @@ public class MainActivity extends AppCompatActivity
         loadUsers();
     }
 
-    private void loadUsers(){
+
+    private void loadUsers() {
         progressDialog.setTitle("Loading users");
         progressDialog.setMessage("Please wait...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(githubAdapter);
         progressDialog.dismiss();
         swipeRefreshLayout.setRefreshing(false);
+
         if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
             EspressoIdlingResource.decrement();
         }
@@ -214,6 +216,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+
+            Intent home = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(home);
 
             } else if (id == R.id.nav_send) {
 

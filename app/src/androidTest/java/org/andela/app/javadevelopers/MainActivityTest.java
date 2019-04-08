@@ -4,7 +4,6 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.andela.app.javadevelopers.view.MainActivity;
-
 import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -20,10 +19,8 @@ import static android.support.test.espresso.Espresso.onView;
 
 import android.support.test.espresso.contrib.RecyclerViewActions;
 
-import static org.junit.Assert.*;
 
-import android.view.View;
-
+import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -49,6 +46,11 @@ public class MainActivityTest {
         // quick check if the recyclerView is visible
         onView(withId(R.id.developer_list)).check(matches(isDisplayed()));
 
+    }
+    @Test
+    public void swipeToRefreshLayout(){
+        registerIdlingResource();
+        onView(withId(R.id.swipeRefreshLayout)).perform(swipeDown());
     }
 
     @Test

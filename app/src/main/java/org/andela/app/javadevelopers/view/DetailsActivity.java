@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,7 +20,8 @@ import org.andela.app.javadevelopers.R;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    TextView github_name, user_github_link;
+    TextView github_name;
+    Button user_github_link;
     ImageView user_profile_photo;
     ImageButton share;
     String github_username, github_link, user_profile_link;
@@ -43,7 +45,6 @@ public class DetailsActivity extends AppCompatActivity {
         user_profile_link = username.getStringExtra("Github_photo_link");
 
         github_name.setText(github_username);
-        user_github_link.setText(github_link);
         Picasso.get()
                 .load(user_profile_link)
                 .placeholder(R.drawable.ac)
