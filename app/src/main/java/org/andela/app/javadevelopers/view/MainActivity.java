@@ -20,8 +20,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.andela.app.javadevelopers.R;
 import org.andela.app.javadevelopers.RecylerClickListener;
@@ -29,6 +27,7 @@ import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
 import org.andela.app.javadevelopers.util.ConnectivityHelper;
+import org.andela.app.javadevelopers.util.EspressoIdlingResource;
 
 import java.util.ArrayList;
 
@@ -126,12 +125,14 @@ public class MainActivity extends AppCompatActivity
         loadUsers();
     }
 
-    private void loadUsers(){
+
+    private void loadUsers() {
         progressDialog.setTitle("Loading users");
         progressDialog.setMessage("Please wait...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
         progressDialog.setCancelable(false);
+        EspressoIdlingResource.increment();
         fetchGithubUsers();
     }
 
@@ -152,6 +153,10 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(githubAdapter);
         progressDialog.dismiss();
         swipeRefreshLayout.setRefreshing(false);
+        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+            EspressoIdlingResource.decrement();
+        }
+
     }
 
     @Override
@@ -222,5 +227,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }

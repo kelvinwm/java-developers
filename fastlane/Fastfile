@@ -11,29 +11,18 @@
 #
 
 # Uncomment the line if you want fastlane to automatically update itself
-<<<<<<< HEAD
 
 update_fastlane
-=======
-# update_fastlane
->>>>>>> ft(share profile): share profile
 
 default_platform(:android)
 
 platform :android do
-<<<<<<< HEAD
     fastlane_require 'dotenv'
 
   before_all do
     Dotenv.overload '.env.secret'
     # Loaded from .env (by fastlane)
       puts "SLACK_URL: #{ENV['SLACK_URL']}"
-=======
-
-  before_all do
-    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
-    ENV['SLACK_API_TOKEN'] = "xoxp-424384161762-591598908245-594115027206-964aead6aa52a8e9fddcb10049e1b70c"
->>>>>>> ft(share profile): share profile
    end
 
   desc "Submit a new Beta Build to Crashlytics Beta"
@@ -70,11 +59,7 @@ platform :android do
 
    error do |lane, exception|
     slack(
-<<<<<<< HEAD
         message: exception.message,
-=======
-        message: exception.message,pick 07bf707 ft(pass data):pass data to details activity
->>>>>>> ft(share profile): share profile
         success: false
     )
     end
