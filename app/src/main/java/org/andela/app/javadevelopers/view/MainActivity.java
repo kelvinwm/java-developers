@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         }));
+        
         if (savedInstanceState != null) {
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
