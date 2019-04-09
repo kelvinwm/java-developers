@@ -24,10 +24,6 @@ import java.util.ArrayList;
 import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
-
-import java.util.ArrayList;
-
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GithubUsersView {
     private ArrayList<GithubUsers> developerlistinstance = new ArrayList<>();
@@ -72,7 +68,7 @@ public class MainActivity extends AppCompatActivity
             }
         }));
 
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         }
@@ -87,12 +83,12 @@ public class MainActivity extends AppCompatActivity
         githubAdapter = new GithubAdapter(developerlistinstance);
         githubAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(githubAdapter);
-
         for (GithubUsers githubUser : githubUsersList) {
 
             Log.d("TAG", "Am reaching hoping " + githubUser.getUsername());
         }
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
