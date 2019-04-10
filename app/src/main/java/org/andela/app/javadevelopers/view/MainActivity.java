@@ -78,11 +78,15 @@ public class MainActivity extends AppCompatActivity
 
             }
         }));
-        
         if (savedInstanceState != null) {
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         }
+
+        loadUsers();
+    }
+
+    private void loadUsers() {
         GithubPresenter githubPresenter = new GithubPresenter(this);
         githubPresenter.getDevelopers();
     }
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     public void githubUsersReady(ArrayList<GithubUsers> githubUsersList) {
         developerlistinstance = githubUsersList;
 
-        githubAdapter = new GithubAdapter(developerlistinstance);
+        GithubAdapter githubAdapter = new GithubAdapter(developerlistinstance);
         githubAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(githubAdapter);
         for (GithubUsers githubUser : githubUsersList) {
@@ -107,6 +111,7 @@ public class MainActivity extends AppCompatActivity
         outState.putParcelableArrayList(LIST_STATE, developerlistinstance);
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
     }
+
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {

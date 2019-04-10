@@ -30,8 +30,8 @@
                 android:layout_height="@dimen/profile_dimen"
                 android:layout_below="@+id/header_cover_layout"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="-60dp"
-                app:cardCornerRadius="70dp">
+                android:layout_marginTop="-100dp"
+                app:cardCornerRadius="90dp">
 
                 <ImageView
                     android:id="@+id/user_profile_photo"
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="76dp"
+                    android:layout_marginTop="90dp"
                     android:hint="Github Username"
                     android:textAlignment="center"
                     android:textColor="@color/textColor"

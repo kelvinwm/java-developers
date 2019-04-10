@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class GithubUsersResponse {
     ArrayList<GithubUsers> items;
-
     public GithubUsersResponse(ArrayList<GithubUsers> items) {
         this.items = items;
     }
