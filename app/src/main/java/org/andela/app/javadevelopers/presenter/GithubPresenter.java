@@ -38,7 +38,7 @@ public class GithubPresenter {
                         }
 
                         GithubUsersResponse dev = response.body();
-                        if(dev != null && dev.getGithubUsersList() != null){
+                        if (dev != null && dev.getGithubUsersList() != null) {
                             ArrayList<GithubUsers> result = dev.getGithubUsersList();
                             githubUsersView.githubUsersReady(result);
                         }

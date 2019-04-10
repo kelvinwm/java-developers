@@ -66,5 +66,4 @@ platform :android do
         success: false
     )
     end
-
 end
