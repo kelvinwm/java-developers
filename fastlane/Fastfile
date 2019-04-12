@@ -12,10 +12,7 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 
-fastlane_require 'dotenv'
-
 update_fastlane
-
 
 default_platform(:android)
 
