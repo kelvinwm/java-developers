@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/kelvinwm/java-developers.svg?branch=ft-unit-tests-156185242)](https://travis-ci.org/kelvinwm/java-developers)
 [![CircleCI](https://circleci.com/gh/kelvinwm/java-developers/tree/develop.svg?style=svg)](https://circleci.com/gh/kelvinwm/java-developers/tree/develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d5d6e96eb5d454a94eaa/maintainability)](https://codeclimate.com/github/kelvinwm/java-developers/maintainability)
 [![codecov](https://codecov.io/gh/kelvinwm/java-developers/branch/ft-unit-tests-156185242/graph/badge.svg)](https://codecov.io/gh/kelvinwm/java-developers)
