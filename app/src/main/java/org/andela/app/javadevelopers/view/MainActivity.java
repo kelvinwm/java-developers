@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -21,8 +20,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.andela.app.javadevelopers.R;
 import org.andela.app.javadevelopers.RecylerClickListener;
@@ -30,12 +27,8 @@ import org.andela.app.javadevelopers.adapter.GithubAdapter;
 import org.andela.app.javadevelopers.model.GithubUsers;
 import org.andela.app.javadevelopers.presenter.GithubPresenter;
 import org.andela.app.javadevelopers.util.ConnectivityHelper;
+import org.andela.app.javadevelopers.util.EspressoIdlingResource;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -100,7 +93,6 @@ public class MainActivity extends AppCompatActivity
             developerlistinstance = savedInstanceState.getParcelableArrayList(LIST_STATE);
             savedRecyclerlayoutstate = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
         }
-
         swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -130,7 +122,9 @@ public class MainActivity extends AppCompatActivity
 
             snackbar.show();
         }
+        loadUsers();
     }
+
 
     private void loadUsers() {
         progressDialog.setTitle("Loading users");
@@ -138,6 +132,7 @@ public class MainActivity extends AppCompatActivity
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
         progressDialog.setCancelable(false);
+        EspressoIdlingResource.increment();
         fetchGithubUsers();
     }
 
@@ -158,8 +153,11 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(githubAdapter);
         progressDialog.dismiss();
         swipeRefreshLayout.setRefreshing(false);
-    }
+        if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+            EspressoIdlingResource.decrement();
+        }
 
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -167,6 +165,7 @@ public class MainActivity extends AppCompatActivity
         outState.putParcelableArrayList(LIST_STATE, developerlistinstance);
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
     }
+
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -220,7 +219,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
         } else if (id == R.id.nav_send) {
 
         }
@@ -229,5 +227,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }
