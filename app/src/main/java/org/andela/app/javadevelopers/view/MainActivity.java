@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity
     private SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
     RecyclerView.LayoutManager layoutManager;
-    private GithubAdapter githubAdapter;
     View parentLayout;
 
     @Override
@@ -101,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        checkInternetConnection();
+        this.checkInternetConnection();
     }
 
     private void checkInternetConnection() {
@@ -125,7 +123,6 @@ public class MainActivity extends AppCompatActivity
         loadUsers();
     }
 
-
     private void loadUsers() {
         progressDialog.setTitle("Loading users");
         progressDialog.setMessage("Please wait...");
@@ -137,7 +134,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void fetchGithubUsers() {
-
         GithubPresenter githubPresenter = new GithubPresenter(this);
         githubPresenter.getDevelopers();
 
@@ -156,7 +152,6 @@ public class MainActivity extends AppCompatActivity
         if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
             EspressoIdlingResource.decrement();
         }
-
     }
 
     @Override
@@ -165,7 +160,6 @@ public class MainActivity extends AppCompatActivity
         outState.putParcelableArrayList(LIST_STATE, developerlistinstance);
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
     }
-
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
