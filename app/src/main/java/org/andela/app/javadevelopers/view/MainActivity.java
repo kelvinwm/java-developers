@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity
         loadUsers();
     }
 
+
     private void loadUsers() {
         progressDialog.setTitle("Loading users");
         progressDialog.setMessage("Please wait...");
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(githubAdapter);
         progressDialog.dismiss();
         swipeRefreshLayout.setRefreshing(false);
+
         if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
             EspressoIdlingResource.decrement();
         }
@@ -160,6 +162,7 @@ public class MainActivity extends AppCompatActivity
         outState.putParcelableArrayList(LIST_STATE, developerlistinstance);
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
     }
+
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -213,14 +216,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-        } else if (id == R.id.nav_send) {
 
+            Intent home = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(home);
+
+            } else if (id == R.id.nav_send) {
+
+            }
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
-
-
-}

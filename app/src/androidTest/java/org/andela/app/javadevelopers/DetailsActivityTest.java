@@ -53,7 +53,6 @@ public class DetailsActivityTest {
         onView(withId(R.id.user_profile_photo)).check(matches(isDisplayed()));
         onView(withId(R.id.share)).check(matches(isDisplayed()));
         onView(withId(R.id.user_profile_name)).check(matches(withText("jumaallan")));
-        onView(withId(R.id.user_github_link)).check(matches(withText("https://github.com/jumaallan")));
 
     }
 
