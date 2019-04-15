@@ -6,6 +6,9 @@
 ## JavaDevelopers
 Android Application that displays a list Nairobi Java Developers.
 
+## Wireframes
+Wireframes were designed using [marvelapp](https://marvelapp.com) wireframing tool. This tool is easy to learn and use. Moreover, it allows sharing of wireframes using a link and viewers can comment on each wireframe providing an easy eay to collect feedback.
+
 ## Getting Started
 Deploy the project on your local machine.
 
